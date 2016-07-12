@@ -30,6 +30,9 @@ class MenuBuilder
         // Project
         $menu = $this->projectMenu($menu);
 
+        // Configuration
+        $menu = $this->configurationMenu($menu);
+
         return $menu;
     }
 
@@ -42,7 +45,6 @@ class MenuBuilder
      */
     private function projectMenu(ItemInterface $menu)
     {
-        // Project
         $menu->addChild('project', [
           'label' => '<i class="fa fa-sitemap"></i> 
                         <span>Projects</span> 
@@ -52,6 +54,7 @@ class MenuBuilder
         ]);
         $menu['project']->setAttribute('class', 'treeview');
         $menu['project']->setChildrenAttribute('class', 'treeview-menu');
+
         $menu['project']->addChild('list', [
           'label' => '<i class="fa fa-circle-o"></i> View All',
           'route' => 'project_index',
@@ -60,6 +63,34 @@ class MenuBuilder
         $menu['project']->addChild('New', [
           'label' => '<i class="fa fa-circle-o"></i> Add Project',
           'route' => 'project_new',
+          'extras' => ['safe_label' => true],
+        ]);
+
+        return $menu;
+    }
+
+    /**
+     * Creates Configuration menu items.
+     *
+     * @param \Knp\Menu\ItemInterface $menu
+     *
+     * @return \Knp\Menu\ItemInterface
+     */
+    private function configurationMenu(ItemInterface $menu)
+    {
+        $menu->addChild('config', [
+          'label' => '<i class="fa fa-gear"></i> 
+                        <span>Configuration</span> 
+                        <i class="fa fa-angle-left pull-right"></i>',
+          'uri' => '#',
+          'extras' => ['safe_label' => true],
+        ]);
+        $menu['config']->setAttribute('class', 'treeview');
+        $menu['config']->setChildrenAttribute('class', 'treeview-menu');
+
+        $menu['project']->addChild('list', [
+          'label' => '<i class="fa fa-circle-o"></i> View All',
+          'route' => 'project_index',
           'extras' => ['safe_label' => true],
         ]);
 
